@@ -8,8 +8,10 @@ import org.springframework.data.neo4j.core.schema.Node
 data class User(
     @Id
     @GeneratedValue
-    var id: Long? = null,
+    val id: Long?,
     val userId: Long,
     val username: String,
     val fullName: String?,
-)
+) {
+    constructor(userId: Long, username: String, fullName: String?) : this(null, userId, username, fullName)
+}

@@ -7,11 +7,19 @@ import org.springframework.data.neo4j.core.schema.Relationship
 data class Post(
     @Id
     @GeneratedValue
-    var id: Long? = null,
+    val id: Long?,
     val postId: Long,
     val mediaType: String,
     val caption: String?,
 
     @Relationship(type = "CREATED", direction = Relationship.Direction.INCOMING)
     val user: User
-)
+) {
+    constructor(postId: Long, mediaType: String, caption: String?, user: User) : this(
+        null,
+        postId,
+        mediaType,
+        caption,
+        user
+    )
+}
